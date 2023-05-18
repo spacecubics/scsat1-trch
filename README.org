@@ -27,7 +27,6 @@
 	CC src/interrupt.p1
 	CC src/timer.p1
 	CC src/ioboard.p1
-    default: Empty
 	CC src/i2c-gpio.p1
 	CC src/ina3221.p1
 	CC src/spi.p1
