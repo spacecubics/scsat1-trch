@@ -95,8 +95,6 @@
 
 static void mpc2717fd_reset(void)
 {
-        uint8_t buf[2];
-
         spi_get();
         (void)spi_trans(0);
         (void)spi_trans(0);
