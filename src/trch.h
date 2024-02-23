@@ -30,7 +30,7 @@
  */
 #define TRCH_CFG_MEM_SEL_BIT (_PORTA_RA0_POSITION)
 #define FPGA_BOOT0_BIT       (_PORTA_RA1_POSITION)
-#define FPGA_BOO11_BIT       (_PORTA_RA2_POSITION)
+#define FPGA_BOOT1_BIT       (_PORTA_RA2_POSITION)
 #define FPGA_PROGRAM_B_BIT   (_PORTA_RA3_POSITION)
 #define FPGA_INIT_B_BIT      (_PORTA_RA4_POSITION)
 #define FPGAPWR_EN_BIT       (_PORTA_RA5_POSITION)
@@ -49,7 +49,7 @@
         LOW(FPGA_BOOT1_BIT) |                   \
         LOW(FPGA_PROGRAM_B_BIT) |               \
         LOW(FPGA_INIT_B_BIT) |                  \
-        LOW(FPGAPWR_EN))
+        LOW(FPGAPWR_EN_BIT))
 
 #define TRISA_FPGA_READY   0x00
 #define TRCH_CFG_MEM_SEL   PORTAbits.RA0
@@ -198,7 +198,7 @@
         IN(FPGA_INIT_B_IN_BIT) )
 
 #define PORTE_INIT (                            \
-        LOW(I2C_INT_SCL_BIT) |                  \
+        LOW(WDOG_OUT_BIT) |                     \
         LOW(FPGA_PROGRAM_B_IN_BIT) |            \
         LOW(FPGA_INIT_B_IN_BIT) )
 
