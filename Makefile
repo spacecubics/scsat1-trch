@@ -9,7 +9,7 @@ DEVICE := 16LF877
 TARGET := PPK4
 
 # Command variables
-CC     := xc8-cc -mc90lib -mcpu=$(DEVICE)
+CC     := xc8-cc -mcpu=$(DEVICE)
 AR     := xc8-ar r
 IPECMD := ipecmd.sh
 RM     := rm -rf

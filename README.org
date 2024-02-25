@@ -39,7 +39,7 @@
     src/fpga.c:43:: warning: (759) expression generates no code
 
     Memory Summary:
-	Program space        used   58Eh (  1422) of  2000h words   ( 17.4%)
+	Program space        used   59Ch (  1436) of  2000h words   ( 17.5%)
 	Data space           used    65h (   101) of   170h bytes   ( 27.4%)
 	EEPROM space         used     0h (     0) of   100h bytes   (  0.0%)
 	Configuration bits   used     1h (     1) of     1h word    (100.0%)
