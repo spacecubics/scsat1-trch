@@ -6,22 +6,22 @@
 ** Prerequisite
    #+begin_example
      $ xc8-cc --version
-     Microchip MPLAB XC8 C Compiler V2.41
-     Build date: Feb  8 2023
-     Part Support Version: 2.41
-     Copyright (C) 2023 Microchip Technology Inc.
+     Microchip MPLAB XC8 C Compiler V2.46
+     Build date: Jan  4 2024
+     Part Support Version: 2.46
+     Copyright (C) 2024 Microchip Technology Inc.
 
      $ cd trch-firmware
      $ git describe
-     release-v1.0
+     release-v1.0-28-g7ec231d
    #+end_example
 
 ** Build
   You need GNU Make in addition to Microchip MPLAB XC8 Compiler to
-  build it. We currently support v2.41.
+  build it. We currently support v2.46.
 
   #+begin_example
-    $ make
+    $ make | grep -v -e 'advisory: (2100)'
 	CC src/main.p1
 	CC src/fpga.p1
 	CC src/interrupt.p1
