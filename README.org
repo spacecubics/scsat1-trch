@@ -1,6 +1,8 @@
-#+title: SC OBC TRCH Firmware
+#+title: TRCH Firmware for SC-Sat1
 
-  This is for SC-OBC A1001.  Do NOT use it for EM1.
+  This is a derived version of the TRCH firmware for SC-Sat1. The
+  original TRCH firmware can be found at
+  https://github.com/spacecubics/trch-firmware/.
 
 * How to build and program
 ** Prerequisite
@@ -53,56 +55,3 @@
    #+begin_example
      $ make program
    #+end_example
-
-* Pins and Signals
-  https://docs.google.com/spreadsheets/d/1tDlF5Ewv5WGajEHtzYHvV77b9ePaPVuW5S8i3cOUTzY/edit?usp=sharing
-
-  - Domain :: Whether a pin is strictly used by the system, or open to
-    User, or reserved and not available to neither.  "User (Shared)"
-    is basically for Users but because the signals are shared between
-    TRCH and the FPGA, the system disables them by setting INPUT when
-    the FPGA is active.
-  - Categroy :: A name of a function which groups pins.
-    - Control :: Pins used for controling the FPGA behaviour are
-      categorized as "Control".
-    - Diagnosis :: Pins which Users can use to diagnose the system
-      when something goes wrong. Users can only read the pins level.
-    - User :: Pins fully open for Users are in this category.
-  - Pin Function :: Either pin is used as a GPIO or used for a function.
-  - External Pull :: Whether a pin has a pull-up, a pull-down, or none.
-    If a pull-up, it is either =VDD_3V3_SYS= or =VDD_3V3=.
-  - States :: We have =INIT=, =POWER_DOWN=, =POWER_OFF=, =POWER_UP=,
-    =READY=, =CONFIG=, =ACTIVE=, and =ERROR=.
-    - INIT :: This is a special state.  This shows the first pin
-      settings TRCH initializes to right after Power-on Reset.  This
-      state is not defined in the state machine.  Please note that
-      these pins are not guaranteed to stay with the initial values.
-      Peripheral initialize functions in C will change to whatever it
-      suites to.
-    - POWER_DOWN :: The state to power down the FPGA.  You will be in
-      this state after =FPGAPWR_EN= is deasserted and until =VDD_3V3=
-      is at the GND level.  In ~fpga.h~, this corresponds to
-      ~FPGA_STATE_POWER_DOWN~.
-    - POWER_OFF :: The state to indicate that the FPGA is fully
-      powered off and =VDD_3V3= is at the GND level.  This corresponds
-      to ~FPGA_STATE_POWER_OFF~.
-    - POWER_UP :: The state when the FPGA is powering up.  That is,
-      from =FPGAPWR_EN= is asserted to =VDD_3V3= is fully up.
-    - READY :: This indicates the FPGA is up and ready to be
-      configured.  This corresponds to ~FPGA_STATE_READY~ in the state
-      machine.
-    - CONFIG :: While in this state, the FPGA is configuring. This
-      represents ~FPGA_STATE_CONFIG~ in the source code.
-    - ACTIVE :: The FPGA is configured and
-      running. ~FPGA_STATE_ACTIVE~.
-    - ERROR :: When TRCH find the watchdog live pulse does not come
-      from the FPGA, you'll be in this state.
-  - Dirs and Levels :: TRCH pins' directions and levels.
-    - =In= :: The pin is INPUT.
-    - =Out= :: The pin is OUTPUT.
-    - =High= :: The pin is driving HIGH.
-    - =LOW= :: The pin is driving LOW.
-    - =X= :: Level can be either HIGH or LOW depending on the system or
-      a User's request.
-    - =-= :: Doesn't matter.  Usually indicates a Level when a pin is
-      configured as INPUT.
