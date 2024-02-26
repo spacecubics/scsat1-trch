@@ -8,6 +8,7 @@
 /* Map signal names */
 #define T_UART_DE          UIO3_00
 #define T_UART_RE_B        UIO3_01
+#define T_3V3_SYS_EN       UIO3_02
 
 void enable_srs3_485(void)
 {
@@ -24,6 +25,7 @@ void disable_srs3_485(void)
 
 int ioboard_init(void)
 {
+        T_3V3_SYS_EN = 1;
         enable_srs3_485();
 
         return 0;
