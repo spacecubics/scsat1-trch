@@ -39,8 +39,11 @@ LIB_OBJS := $(LIB_SRCS:.c=.p1)
 
 LIBDEVICE := src/libdevice.a
 
+ALL_OBJS := $(OBJS) $(LIB_OBJS)
+ALL_DEPS := $(patsubst %.p1,%.d,$(ALL_OBJS))
+
 # Clean File
-CF      = $(HEXDIR) src/*.p1 src/*.a src/*.d MPLABXLog.* log.*
+CF      = $(HEXDIR) $(ALL_OBJS) $(ALL_DEPS) $(LIBDEVICE) MPLABXLog.* log.*
 
 # Quiets
 ifndef V
