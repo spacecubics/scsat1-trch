@@ -1,0 +1,41 @@
+name: Build
+on: [push, pull_request]
+env:
+  XC8_URL: https://ww1.microchip.com/downloads/aemDocuments/documents/DEV/ProductDocuments/SoftwareTools
+  XC8_INSTALL_DIR: microchip/xc8
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        xc8-version:
+          - 'v2.46'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache XC8
+        uses: actions/cache@v4
+        id: cache-xc8
+        with:
+          path: ${{ env.XC8_INSTALL_DIR }}
+          key: xc8-${{ matrix.xc8-version }}-full-install-linux-x64-installer.run
+
+      - name: Download XC8
+        if: steps.cache-xc8.outputs.cache-hit != 'true'
+        run: |
+          wget $XC8_URL/xc8-${{ matrix.xc8-version }}-full-install-linux-x64-installer.run
+          chmod +x *.run
+
+      - name: Install XC8
+        if: steps.cache-xc8.outputs.cache-hit != 'true'
+        run: |
+          fakeroot ./*.run --mode unattended --netservername localhost --LicenseType FreeMode --prefix $GITHUB_WORKSPACE/$XC8_INSTALL_DIR
+
+      - name: Build
+        run: |
+          export PATH=$GITHUB_WORKSPACE/$XC8_INSTALL_DIR/bin:$PATH
+          make
