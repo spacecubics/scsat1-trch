@@ -12,6 +12,9 @@ jobs:
       matrix:
         xc8-version:
           - 'v2.46'
+        target-board:
+          - 'main'
+          - 'adcs'
 
     steps:
       - name: Checkout
@@ -38,4 +41,4 @@ jobs:
       - name: Build
         run: |
           export PATH=$GITHUB_WORKSPACE/$XC8_INSTALL_DIR/bin:$PATH
-          make
+          make TARGET_BOARD=${{ matrix.target-board }}
